@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 
 namespace MantisProject
@@ -16,7 +17,50 @@ namespace MantisProject
        : base(manager)
         { }
 
-        
+        public int GetProjectCount()
+        {
+            return driver.FindElements(By.XPath("//table[3]/tbody/tr[@class='row-1' or @class='row-2']/td/a")).Count;
+        }
+
+        private List<ProjectData> projectsCashe = null;
+
+        public List<ProjectData> GetAllProjects()
+        {
+            if (projectsCashe == null) //если кэш еще не заполнен то заполняем его
+            {
+                projectsCashe = new List<ProjectData>();
+                var rows = driver.FindElements(By.XPath("//table[3]/tbody/tr[@class='row-1' or @class='row-2']"));
+                foreach (var element in rows)
+                {
+                    var cells = element.FindElements(By.TagName("a"));
+                    string name = cells[0].Text;
+                    //string description = cells[1].Text;
+
+                    projectsCashe.Add(new ProjectData()
+                    {
+                        Name = name,
+                       // Description = description
+                    });
+                }
+            }
+            return new List<ProjectData>(projectsCashe);
+        }
+
+          
+
+            //var rows = driver.FindElements(By.XPath("//table[3]/tbody/tr[@class='row-1' or @class='row-2']"));
+            // foreach (var row in rows)
+            // {
+            //    string name = row.Text;
+            //   string href = row.GetAttribute("href");
+            //     Match m = Regex.Match(href, @"\d=$");
+            //   string id = m.Value;
+
+
+
+           
+
+
 
         public ProjectManagementHelper Create(ProjectData project)
         {
@@ -49,7 +93,7 @@ namespace MantisProject
 
         public ProjectManagementHelper SelectProject()
         {
-            driver.FindElement(By.CssSelector("[href='manage_proj_edit_page\\.php\\?project_id\\=7']")).Click();
+            driver.FindElement(By.XPath("(//tbody)[3]/tr[3]/td/a")).Click();
             return this;
         }
 
