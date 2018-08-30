@@ -15,10 +15,12 @@ namespace MantisProject
         public void ProjectCreationTest()
         {
 
-
-            ProjectData project = new ProjectData("тест");
-            project.Description = "description";
-
+            ProjectData project = new ProjectData()
+            {
+               Name = "тест",
+               Description = "description"
+            };
+            
             app.Navigator.GoToManageProjects();
             app.Projects.Create(project);
 

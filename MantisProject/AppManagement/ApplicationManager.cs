@@ -22,6 +22,7 @@ namespace MantisProject
         public LoginHelper loginHelper { get; set; }
         public ManagementMenuHelper menuHelper { get;set; }
         public ProjectManagementHelper projectHelper { get; set; }
+        public AdminHelper adminHelper { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();// это объект который будет устанавливать соответствие между текущим потоком и объектом типа ApplicationManager
 
@@ -34,10 +35,11 @@ namespace MantisProject
             options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
 
-            baseURL = "http://localhost";
+            baseURL = "http://localhost/mantisbt-1.2.17";
             loginHelper = new LoginHelper(this);
             menuHelper = new ManagementMenuHelper(this);
             projectHelper = new ProjectManagementHelper(this);
+            adminHelper = new AdminHelper(this, baseURL);
         }
 
        
@@ -58,7 +60,7 @@ namespace MantisProject
             if (! app.IsValueCreated ) 
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-1.2.17/login_page.php";
+                newInstance.driver.Url  = newInstance.baseURL + "/login_page.php";
                 app.Value = newInstance;
             }
 
@@ -98,7 +100,13 @@ namespace MantisProject
                 return menuHelper;
             }
         }
-
+        public AdminHelper Admin
+        {
+            get
+            {
+                return adminHelper;
+            }
+        }
 
 
     }
