@@ -26,13 +26,15 @@ namespace MantisProject
 
             List<ProjectData> newProjects = app.Projects.GetAllProjects();
             oldProjects.RemoveAt(0);
+            oldProjects.Sort();
+            newProjects.Sort();
             Assert.AreEqual(oldProjects, newProjects);
 
             foreach (ProjectData project in newProjects)
             {
                
                 Assert.AreNotEqual(project.Name, tobeRemoved.Name);
-                //Assert.AreNotEqual(project.Description, tobeRemoved.Description);
+                Assert.AreNotEqual(project.Description, tobeRemoved.Description);
             }
         }
     }

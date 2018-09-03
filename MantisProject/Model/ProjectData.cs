@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace MantisProject
 {
   
-        public class ProjectData : IEquatable<ProjectData>
-        {
+        public class ProjectData : IEquatable<ProjectData>, IComparable<ProjectData>
+    {
             public ProjectData()
             {
 
@@ -32,11 +32,16 @@ namespace MantisProject
                 }
                 return Name == other.Name;
             }
+        public int CompareTo(ProjectData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return Name.CompareTo(other.Name);
+        }
+    
 
-
-
-
-      
         public string Name { get; set; }
         public string Description { get; set; }
             }

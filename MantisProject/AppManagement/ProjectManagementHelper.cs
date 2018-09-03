@@ -47,21 +47,6 @@ namespace MantisProject
         }
 
           
-
-            //var rows = driver.FindElements(By.XPath("//table[3]/tbody/tr[@class='row-1' or @class='row-2']"));
-            // foreach (var row in rows)
-            // {
-            //    string name = row.Text;
-            //   string href = row.GetAttribute("href");
-            //     Match m = Regex.Match(href, @"\d=$");
-            //   string id = m.Value;
-
-
-
-           
-
-
-
         public ProjectManagementHelper Create(ProjectData project)
         {
             CreationProject();
