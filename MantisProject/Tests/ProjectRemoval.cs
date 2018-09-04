@@ -34,7 +34,7 @@ namespace MantisProject
             {
                
                 Assert.AreNotEqual(project.Name, tobeRemoved.Name);
-                Assert.AreNotEqual(project.Description, tobeRemoved.Description);
+                //Assert.AreNotEqual(project.Description, tobeRemoved.Description);
             }
         }
     }
