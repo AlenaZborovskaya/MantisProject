@@ -23,6 +23,7 @@ namespace MantisProject
         public ManagementMenuHelper menuHelper { get;set; }
         public ProjectManagementHelper projectHelper { get; set; }
         public AdminHelper adminHelper { get; set; }
+        public APIHelper apiHelper { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();// это объект который будет устанавливать соответствие между текущим потоком и объектом типа ApplicationManager
 
@@ -40,6 +41,7 @@ namespace MantisProject
             menuHelper = new ManagementMenuHelper(this);
             projectHelper = new ProjectManagementHelper(this);
             adminHelper = new AdminHelper(this, baseURL);
+            apiHelper = new APIHelper(this);
         }
 
        
@@ -105,6 +107,13 @@ namespace MantisProject
             get
             {
                 return adminHelper;
+            }
+        }
+        public APIHelper API
+        {
+            get
+            {
+                return apiHelper;
             }
         }
 

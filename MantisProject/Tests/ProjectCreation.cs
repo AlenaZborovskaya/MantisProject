@@ -14,15 +14,23 @@ namespace MantisProject
         [Test]
         public void ProjectCreationTest()
         {
+            AccountData account = new AccountData("administrator", "root");
 
             ProjectData project = new ProjectData()
             {
                Name = "тест",
                Description = "description"
             };
-            
-            app.Navigator.GoToManageProjects();
-            app.Projects.Create(project);
+
+            ProjectData projectData = new ProjectData()
+            {
+                Id = "1"
+            };
+
+            app.API.CreateNewProject(account, project);
+
+            //app.Navigator.GoToManageProjects();
+           // app.Projects.Create(project);
 
 
         }
