@@ -32,7 +32,7 @@ namespace MantisProject
         }
 
         public void CreateNewProject(AccountData account, ProjectData projectData)
-        {
+        
             {
                 Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
                 Mantis.ProjectData project = new Mantis.ProjectData();
@@ -43,7 +43,23 @@ namespace MantisProject
 
                 client.mc_project_add(account.Username, account.Password, project);
             }
+
+        public void GetListProjects(AccountData account, ProjectData projectData)
+
+        {
+
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            List<Mantis.ProjectData> projects = new List<Mantis.ProjectData>();
+            foreach (var project in projects)
+            {
+                project.name = projectData.Name;
+                project.description = projectData.Description;
+                project.id = projectData.Id;
+            }
+
+            client.mc_projects_get_user_accessible(account.Username, account.Password);
         }
+
     }
 }
 
